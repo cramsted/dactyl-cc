@@ -1,0 +1,15 @@
+.cache/
+build/CMakeCache.txt
+build/CMakeFiles/
+build/Makefile
+build/bottom_left.scad
+build/bottom_right.scad
+build/cmake_install.cmake
+build/compile_commands.json
+build/dactyl
+build/glm/
+build/left.scad
+build/lib/
+build/right.scad
+build/util/
+compile_commands.json

@@ -17,7 +17,8 @@ constexpr double kAColumnRadius = 70;
 constexpr double kSColumnRadius = 65;
 constexpr double kGColumnRadius = 65;
 constexpr double kFColumnRadius = 70;
-constexpr double kCapsColumnRadius = 60;
+constexpr double kCapsColumnRadius = 62;
+constexpr double kModColumnRadius = 60;
 
 // Rotates a key about the x axis until it has traveled the direct distance (not on the arc).
 Key GetRotatedKey(double radius, bool up) {
@@ -147,6 +148,18 @@ KeyData::KeyData(TransformList key_origin) {
     k.SetParent(key_f);
     k.SetPosition(20, -1.310, 3.305);
     k.t().ry = -4;
+  });
+
+  key_m3.Configure([&](Key& k) {
+    k.name = "mod 3";
+
+    // Absolute:
+    // k.SetPosition(60.16, 48.06, 37.39);
+    // k.t().ry = -30;
+
+    k.SetParent(key_g);
+    k.SetPosition(21, -3.5, 1.305);
+    k.t().ry = -2;
   });
 
   key_s.Configure([&](Key& k) {
@@ -321,6 +334,26 @@ KeyData::KeyData(TransformList key_origin) {
   key_shift.Configure([&](Key& k) {
     k.name = "shift";
     k.SetParent(key_caps);
+  });
+
+  key_left_ctrl = GetRotatedKey(kCapsColumnRadius, false);
+  key_left_ctrl.Configure([&](Key& k) {
+    k.name = "left_ctrl";
+    k.SetParent(key_shift);
+  });
+
+  // mod keys
+  key_m2 = GetRotatedKey(kModColumnRadius, true);
+  key_m2.Configure([&](Key& k) {
+    k.name = "mod 2";
+    k.SetParent(key_m3);
+  });
+
+
+  key_m1 = GetRotatedKey(kModColumnRadius, true);
+  key_m1.Configure([&](Key& k) {
+    k.name = "mod 3";
+    k.SetParent(key_m2);
   });
 
   // Keys are measured from the tip of the switch and by default keys are measured from the
